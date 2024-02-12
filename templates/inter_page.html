@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/css/style.css">
+  <style>
+
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      text-align: center;
+      width: 100%;
+      min-height: 100vh;
+      background-image:url(static/bg.jpg);
+      background-position: center;
+      background-size: cover;
+      padding: 10px 10% ;
+      overflow: hidden ;
+      position:relative;
+    }
+    .container h1{
+        margin-top: 110px;
+        font-size: 40px;
+        font-weight: bolder;
+    }
+
+    
+
+    nav{
+    padding: 15px 0;
+    display: flex;
+    align-items:end;
+    justify-content:space-between;
+    transition: 0.3s;
+}
+
+
+.logo{
+    width: 250px;
+}
+
+
+    .box {
+      display: inline-block;
+      width: 200px;
+      height: 150px;
+      margin-top: 100px;
+      margin-left: 50px;
+      background-color: #98999d;
+      color: #fff;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+      transition: 0.3s;
+
+    }
+
+    .box:hover {
+      background: linear-gradient(to bottom right, #3c6ba3, #5077a2);
+      box-shadow: #b6b6b6;
+    }
+
+    
+    h2 {
+      z-index:1;
+      margin-top: 15px;
+      text-align:center;
+      padding: 20px;
+      font-size: 24px;
+      text-decoration: none;
+      right:10%;
+    }
+
+    .pop-img-left{
+    width: 800px;
+    position:absolute;
+    bottom: 250px;
+    left: 5%;
+}
+
+.pop-img-left.anim{
+    animation-delay: 0.5s;
+}
+
+  </style>
+  <title>Choose approach</title>
+</head>
+<body>
+
+  <div class="container">
+        <nav>
+         <img src="static/logo.png" class="logo">
+        </nav>
+      <img src="static/aboutus.png" class="pop-img-left anim">
+
+    <div style="float: right;">
+    <h1 class="anim " style="font-family: 'Palatino'" >Welcome to our Medicare System  </h1>
+    
+    <div >
+      <a href="{{url_for('chat_page')}}" class="box anim "> <h2>Bayesian Approach</h2></a>
+    </div>
+
+    <div>
+    <a href="{{url_for('questionnarie')}}" class="box anim">
+     <h2>Knowledge Approach</h2> </a>
+    </div>
+    </a>
+  </div>
+  </div>
+
+</body>
+</html>

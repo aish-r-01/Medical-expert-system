@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer the questions for diagnosis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .question-box {
+            border: 4px solid #ccc;
+            padding: 20px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+        .submit-button {
+            margin-top: 20px;
+            margin-bottom: 50px;
+            font-size: 20px;
+            background-image: linear-gradient(45deg,#7565e9,#00059d);
+            border-radius: 20px;
+        }
+
+        nav{
+    padding: 15px 0;
+    display: flex;
+    align-items:end;
+    justify-content:space-between;
+    transition: 0.3s;
+        }
+
+    .logo{
+    width: 250px;}
+
+    .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+    .container-def {
+      
+      width: 100%;
+      min-height: 100vh;
+      background-image:url(static/bg.jpg);
+      background-position: center;
+      background-size: cover;
+      padding: 10px 10% ;
+      overflow: hidden ;
+      position:relative;
+    }
+    </style>
+</head>
+<body>
+
+<div class="container-def ">
+    <nav>
+        <img src="static/logo.png" class="logo">
+    </nav>
+    <form action="{{ url_for('submit') }}" onsubmit="return validateForm()" method="post">
+        <h2>Answer the questions for diagnosis</h2>
+        <div id="error-message" class="error-message"></div>
+        {% for i, question in questions %}
+            <div class="question-box">
+                <label for="q{{ i }}">{{ question }}</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="q{{ i }}_yes" name="q{{ i }}" value="yes">
+                    <label class="form-check-label" for="q{{ i }}_yes">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="q{{ i }}_no" name="q{{ i }}" value="no">
+                    <label class="form-check-label" for="q{{ i }}_no">No</label>
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary float-right submit-button">Submit</button>
+    </form>
+</div>
+
+</body>
+<script>
+    function validateForm() {
+        var radios = document.querySelectorAll('input[type="radio"]:checked');
+        if (radios.length < 10) {
+            document.getElementById('error-message').innerText = 'Please answer all questions.';
+            window.scrollTo(0, 0);
+            return false;
+        }
+        return true;
+    }
+</script>
+</html>

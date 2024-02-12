@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #chat-container {
+            width: 1000px;
+            margin: 50px auto;
+            border: 5px solid #ccc;
+            padding: 10px;
+            height: 600px;
+            overflow-y: scroll;
+            border-radius: 20px;
+            font-size: 20px;
+        }
+
+        #user-input {
+            width: 80%;
+            padding: 30px;
+            border: 3px solid#7279a9;
+            height: 10px;
+            font-size: 20px;
+            margin-bottom: 1px;
+            margin-left:130px ;
+            border-radius: 20px;
+            bottom: 100px;
+            right:20px;
+            left: 40px;
+            background-color:#eef0f3d3 ;
+            
+        }
+        .message-container {
+        margin-bottom: 10px; /*  some margin between messages */
+    }
+
+      
+      /*  styles for user and bot messages */
+    .user-message, .bot-message {
+        display: flex;
+        align-items:flex-start;
+       
+    }
+
+    .user-message {
+        background-color: #d3e0dc;
+        color: #000;
+        padding: 8px;
+        border-radius: 8px;
+        margin: 5px 5px;
+        text-align:right;
+        justify-content: flex-end;
+        margin-left:100px;
+    }
+
+    .bot-message {
+        background-color: #f0f0f0;
+        color: #000;
+        padding: 8px;
+        border-radius: 8px;
+        margin: 5px 5px;
+        text-align:left;
+        justify-content: flex-start;
+        margin-right: 100px;
+    }
+
+    /* Add styles for user and bot icons */
+    .user-icon, .bot-icon {
+        margin-right: 8px;
+        width: 24px;
+        height: 24px;
+        border-radius: 70%;
+    }
+
+    /* Additional styling for image-based icons */
+    .user-icon {
+        background-color: #87CEEB;
+        color: #fff; 
+        margin-left: 8px;   
+    }
+
+    .bot-icon {
+        background-color: #ADD8E6;
+        color: #fff;
+    }
+
+        .button-inp{
+            width: 1000px; 
+            position: relative; 
+        }
+
+        button { 
+        position: absolute; 
+        top: 0; 
+        border-radius: 5px; 
+        right: 0px; 
+        z-index: 2; 
+        border: none; 
+        top: 2px; 
+        height: 50px; 
+        cursor: pointer; 
+        color: white; 
+        background-color: #1e90ff; 
+        transform: translateX(2px); 
+    } 
+    </style>
+</head>
+<body>
+ 
+    <div class="hero">
+        <nav>
+         <img src="static/logo.png" class="logo">
+        </nav>
+
+        <div id="chat-container" ><output type="text" placeholder="Welcome"></div>
+      
+        <input type="text" id="user-input" placeholder="Type a message..." onkeydown="sendMessage(event)">
+       
+        <script>
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+        
+        function appendMessage(message, sender) {
+        const messageElement = document.createElement('div');
+        const messageContainer = document.createElement('div');
+        const iconElement = document.createElement('img'); // Use image elements for icons
+
+        if (sender === 'User') {
+            
+            messageContainer.className = 'message-container';
+            messageElement.className = 'user-message';
+            iconElement.className = 'user-icon';
+            iconElement.src = 'static/user_icon.png'; 
+            const textElement = document.createElement('span');
+            textElement.textContent = message;
+            messageElement.appendChild(textElement);
+            messageElement.appendChild(iconElement);
+
+        } else if (sender === 'Bot') {
+            
+            messageContainer.className = 'message-container';
+            messageElement.className = 'bot-message';
+            iconElement.className = 'bot-icon';
+            iconElement.src = 'static/bot_icon.png'; 
+            messageElement.appendChild(iconElement);
+            const lines = message.split('\n');
+            lines.forEach((line, index) => {
+                const lineElement = document.createElement('p');
+                lineElement.textContent = line;
+                
+                // Add <br> after each line except the last one
+                if (index < lines.length - 1) {
+                    lineElement.innerHTML += '<br>';
+                }
+                messageElement.appendChild(lineElement);
+            });
+        }
+
+        //const textElement = document.createElement('span');
+        //textElement.textContent = message;
+
+        // Arrange user and bot messages to the right and left, respectively
+       
+
+        chatContainer.appendChild(messageElement);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+        
+            function sendMessage(event) {
+                if (event.key === 'Enter') {
+                    const userMessage = userInput.value;
+                    appendMessage(userMessage, 'User');
+
+        
+                    // Send user message to server
+                    fetch('/get_response', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `user_message=${userMessage}`,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        let obj=JSON.parse(JSON.stringify(data))
+                        const botResponse = obj.bot_response;
+                        appendMessage(botResponse,'Bot');
+                    });
+        
+                    userInput.value = '';
+                }
+            }
+        </script>
+   
+
+</body>
+</html>
