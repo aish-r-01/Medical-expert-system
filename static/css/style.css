@@ -1,0 +1,165 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+.hero{
+    width: 100%;
+    min-height: 100vh;
+    background-image:url(bg.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 10px 10% ;
+    overflow: hidden ;
+    position:relative;
+}
+
+
+nav{
+    padding: 15px 0;
+    display: flex;
+    align-items:end;
+    justify-content:space-between;
+    transition: 0.3s;
+}
+
+
+.logo{
+    width: 250px;
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 15px 15px;   
+    font-size: 20px;
+    margin-left: 40px;
+   
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: rgb(68, 58, 133);
+    font-weight: 450;
+   
+}
+
+nav ul li a:hover{
+    background: #d1cfcfeb;
+    padding:10px 25px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.login-btn{
+    text-decoration: none;
+    color: rgb(68, 58, 133);
+    margin-right:15 px;
+    display: inline-block;
+    padding:14px 35px;
+    font-size: 18px;
+    
+}
+
+.btn{
+    display: inline-block;
+    text-decoration: none;
+    padding:14px 35px;
+    color:rgb(255, 255, 255);
+    background-image: linear-gradient(45deg,#7565e9,#00059d);
+    font-size: 16px;
+    border-radius: 30px;
+    border-top-right-radius: 0;
+    transition: 0.5s;
+}
+
+.content{
+    margin-top: 10%;
+    max-width: 600px;
+}
+
+.content h1{
+    margin-top: 200px;
+    font-size:70px;
+    color: black;
+    margin-bottom: 20px ;
+}
+.content p{
+    font-size: 20px;
+    margin: 10px 0 30px;
+    color:#333;
+    animation-delay: 0.5s;
+}
+
+.content .btn{
+    padding: 15px 80px;
+    font-size: 16px;
+    animation-delay: 1s;
+}
+
+.btn:hover{
+    background: #5077cc;
+    border-color: #4d5098;
+    box-shadow: #b6b6b6;
+}
+
+.pop-img{
+    width: 600px;
+    position:absolute;
+    bottom: 300px;;
+    right: 10%;
+}
+
+.pop-img.anim{
+    animation-delay: 0.5s;
+}
+.anim{
+    opacity: 0;
+    transform: translateY(30px);
+    animation: moveup 0.5s linear forwards;
+}
+
+@keyframes moveup{
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.about{
+    padding: 6rem 7%;
+    background:#bcceee;
+}
+
+.about-content a{
+    background:rgb(68, 58, 133) ;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    color: white;
+    transition: .5s;
+}
+.about-content a:hover{
+    background: transparent;
+    border: 1px solid rgb(68, 58, 133);
+    color: black;
+}
+
+.content-about{
+    margin-top: 10%;
+    max-width: 600px;
+}
+
+.content-about h1{
+    margin-top: 200px;
+    font-size:70px;
+    color: black;
+    margin-bottom: 20px ;
+}
+.content-about p{
+    font-size: 20px;
+    margin: 10px 0 30px;
+    color:#333;
+    animation-delay: 0.5s;
+}
